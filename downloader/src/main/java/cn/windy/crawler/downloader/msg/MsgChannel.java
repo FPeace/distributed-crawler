@@ -1,4 +1,4 @@
-package cn.windy.crawler.downloader;
+package cn.windy.crawler.downloader.msg;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;

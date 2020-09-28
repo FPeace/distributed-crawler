@@ -1,13 +1,13 @@
-package cn.windy.crawler.downloader;
+package cn.windy.crawler.downloader.msg;
 
 
-import cn.windy.crawler.downloader.MsgChannel;
+import cn.windy.crawler.downloader.msg.MsgChannel;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
 @Component
-@EnableBinding(MsgChannel.class)
+@EnableBinding({MsgChannel.class })
 public class MsgListener {
 
     @StreamListener(MsgChannel.DOWNLOAD_TASK_INPUT_CHANNEL)
