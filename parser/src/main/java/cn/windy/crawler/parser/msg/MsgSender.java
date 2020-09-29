@@ -1,5 +1,6 @@
 package cn.windy.crawler.parser.msg;
 
+import cn.windy.crawler.common.dto.Task;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.MessageChannel;
@@ -21,6 +22,8 @@ public class MsgSender {
 
     @Scheduled(fixedDelay = 1000)
     public void send(){
-        messageChannel.send(MessageBuilder.withPayload("SSSSSS").build());
+        Task task = new Task();
+        task.setUrl("https://www.baidu.com");
+        messageChannel.send(MessageBuilder.withPayload(task).build());
     }
 }
