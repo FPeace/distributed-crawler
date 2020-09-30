@@ -61,7 +61,7 @@
 			<scope>test</scope>
 		</dependency>
         <dependency>
-            <groupId>cn.windy</groupId>
+            <groupId>cn.windy.crawler</groupId>
             <artifactId>crawler-common</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

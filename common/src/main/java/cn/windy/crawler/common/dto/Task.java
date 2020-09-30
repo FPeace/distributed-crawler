@@ -33,7 +33,7 @@ public class Task {
      */
     private int executionTimes = 0;
 
-    private byte[] body;
+    private String body;
 
     public String getUrl() {
         return url;
@@ -78,6 +78,14 @@ public class Task {
     public enum HttpMethod{
         GET,
         POST
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override

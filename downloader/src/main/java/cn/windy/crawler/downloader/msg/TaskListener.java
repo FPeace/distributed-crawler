@@ -9,8 +9,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,9 +17,9 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Function;
 
 @Component
-@EnableBinding({TaskChannel.class })
 public class TaskListener {
 
     private final AuthFeignClient authFeignClient;
@@ -50,8 +49,16 @@ public class TaskListener {
         }
     }).build();
 
-    @StreamListener(TaskChannel.DOWNLOAD_TASK_INPUT_CHANNEL)
-    private void receive(Task task){
+
+    @Bean
+    public Function<List<Task>,List<Task>> task(){
+       return tasks -> {
+           tasks.parallelStream().forEach(this::deal);
+           return tasks;
+       };
+    }
+
+    private void deal(Task task){
 
         if (task == null){
             return;
@@ -88,7 +95,7 @@ public class TaskListener {
             Response response = httpClient.newCall(request).execute();
             task.setExecutionTimes(task.getExecutionTimes() + 1);
             String stringBody = response.body().string();
-            response.body();
+            task.setBody(stringBody);
         } catch (IOException e) {
             e.printStackTrace();
         }
