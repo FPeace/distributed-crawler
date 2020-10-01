@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 @Component
 public class MsgSender {
-
+    
     @Bean
     public Function<List<Task>, List<Task>> parse(){
         return tasks -> {
